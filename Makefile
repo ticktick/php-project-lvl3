@@ -1,5 +1,6 @@
 install:
 	composer install
+	make -C src install
 
 test-coverage:
 	composer run-script phpunit tests -- --coverage-clover build/logs/clover.xml
