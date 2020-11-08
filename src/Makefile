@@ -1,11 +1,5 @@
-install:
-	composer install
-
-lint:
-	composer run-script phpcs -- --standard=PSR12 app tests
+serve:
+	php artisan serve --host 0.0.0.0
 
 test:
 	composer run-script phpunit tests
-
-test-coverage:
-	composer run-script phpunit tests -- --coverage-clover build/logs/clover.xml

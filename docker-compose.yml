@@ -1,0 +1,23 @@
+version: '3'
+
+services:
+  db:
+    image: postgres:13.0
+    environment:
+      POSTGRES_PASSWORD: password
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+
+  php:
+    build:
+      context: .
+    ports:
+      - 8001:8000
+    volumes:
+      - .:/app
+    depends_on:
+      - db
+    command: make start
+
+volumes:
+  pgdata:
