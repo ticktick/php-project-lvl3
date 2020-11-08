@@ -7,6 +7,9 @@ test-coverage:
 start:
 	make -C src serve
 
+lint:
+	make -C src lint
+
 test:
 	make -C src test
 
