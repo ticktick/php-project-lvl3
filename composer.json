@@ -1,5 +1,8 @@
 {
-    "require": {
+  "name": "hexlet/code",
+  "type": "project",
+  "description": "Page analyzer",
+  "require": {
         "laravel/installer": "^4.0"
     },
     "scripts": {
