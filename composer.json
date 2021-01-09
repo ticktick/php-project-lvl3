@@ -3,10 +3,10 @@
   "type": "project",
   "description": "Page analyzer",
   "require": {
-        "laravel/installer": "^4.0"
-    },
-    "scripts": {
-      "phpunit": "phpunit",
-      "phpcs": "phpcs"
-    }
+      "laravel/installer": "^4.0"
+  },
+  "scripts": {
+    "phpunit": "phpunit",
+    "phpcs": "phpcs"
+  }
 }

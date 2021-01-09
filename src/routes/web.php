@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\DomainController;
 
 /*
 |--------------------------------------------------------------------------
@@ -13,6 +14,12 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+require_once __DIR__ . '/../vendor/autoload.php';
+
 Route::get('/', function () {
-    return view('welcome');
+    return view('domain.add_form');
 });
+
+Route::post('domain', DomainController::class . '@add')->name('domains.add');
+Route::get('domains', DomainController::class . '@list')->name('domains.list');
+Route::get('domain/{id}', DomainController::class . '@one')->name('domains.one');
