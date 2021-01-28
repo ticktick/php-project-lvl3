@@ -8,6 +8,13 @@ services:
     volumes:
       - pgdata:/var/lib/postgresql/data
 
+  db_test:
+    image: postgres:13.0
+    environment:
+      POSTGRES_PASSWORD: password
+    volumes:
+      - pgdata_test:/var/lib/postgresql/data_test
+
   php:
     build:
       context: .
@@ -21,3 +28,4 @@ services:
 
 volumes:
   pgdata:
+  pgdata_test:

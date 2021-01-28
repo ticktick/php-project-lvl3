@@ -21,5 +21,5 @@ Route::get('/', function () {
 });
 
 Route::post('domain', DomainController::class . '@add')->name('domains.add');
-Route::get('domains', DomainController::class . '@list')->name('domains.list');
+Route::get('domain', DomainController::class . '@list')->name('domains.list');
 Route::get('domain/{id}', DomainController::class . '@one')->name('domains.one');

@@ -19,3 +19,6 @@ jobs:
 
       - name: Detecting standards violations
         run: make lint
+
+      - name: Run tests
+        run: make test
