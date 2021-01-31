@@ -4,14 +4,18 @@ services:
   db:
     image: postgres:13.0
     environment:
-      POSTGRES_PASSWORD: password
+      POSTGRES_USER: analyzer
+      POSTGRES_PASSWORD: 12345
+      POSTGRES_DB: analyzer
     volumes:
       - pgdata:/var/lib/postgresql/data
 
   db_test:
     image: postgres:13.0
     environment:
-      POSTGRES_PASSWORD: password
+      POSTGRES_USER: analyzer
+      POSTGRES_PASSWORD: 12345
+      POSTGRES_DB: analyzer
     volumes:
       - pgdata_test:/var/lib/postgresql/data_test
 
