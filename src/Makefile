@@ -2,6 +2,7 @@ install:
 	composer install
 	cp -n .env.example .env|| true
 	php artisan key:gen --ansi
+	php artisan migrate
 
 serve:
 	php artisan serve --host 0.0.0.0

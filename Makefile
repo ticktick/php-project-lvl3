@@ -2,7 +2,6 @@ install:
 	docker-compose up -d
 	composer install
 	make -C src install
-	docker-compose run php php artisan migrate
 
 test-coverage:
 	composer run-script phpunit tests -- --coverage-clover build/logs/clover.xml
