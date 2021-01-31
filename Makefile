@@ -13,7 +13,7 @@ lint:
 	make -C src lint
 
 test:
-	make -C src test
+	docker-compose run php make -C src test
 
 compose:
 	docker-compose up
