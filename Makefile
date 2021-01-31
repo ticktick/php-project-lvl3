@@ -1,4 +1,5 @@
 install:
+    docker-compose up -d
 	composer install
 	make -C src install
 
