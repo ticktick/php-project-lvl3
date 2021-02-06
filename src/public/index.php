@@ -3,8 +3,6 @@
 use Illuminate\Contracts\Http\Kernel;
 use Illuminate\Http\Request;
 
-error_reporting(E_ALL);
-
 define('LARAVEL_START', microtime(true));
 
 /*
