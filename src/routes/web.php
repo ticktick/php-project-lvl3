@@ -1,7 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\DomainController;
+use App\Http\Controllers\UrlController;
 
 /*
 |--------------------------------------------------------------------------
@@ -17,9 +17,10 @@ use App\Http\Controllers\DomainController;
 require_once __DIR__ . '/../vendor/autoload.php';
 
 Route::get('/', function () {
-    return view('domain.add_form');
+    return view('urls.add_form');
 });
 
-Route::post('domain', DomainController::class . '@add')->name('domains.add');
-Route::get('domain', DomainController::class . '@list')->name('domains.list');
-Route::get('domain/{id}', DomainController::class . '@one')->name('domains.one');
+Route::post('urls', UrlController::class . '@add')->name('urls.add');
+Route::get('urls', UrlController::class . '@list')->name('urls.list');
+Route::get('urls/{id}', UrlController::class . '@one')->name('urls.one');
+Route::post('urls/{id}/checks', UrlController::class . '@makeCheck')->name('urls.makeCheck');
