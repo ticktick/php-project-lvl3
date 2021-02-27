@@ -2,6 +2,7 @@
 
 namespace Tests\Feature;
 
+use Illuminate\Support\Facades\Http;
 use Tests\TestCase;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 
@@ -53,9 +54,13 @@ class UrlTest extends TestCase
 
     public function testUrlCheck(): void
     {
+        Http::fake(Http::response([], 404));
         $response = $this->post("/urls/{$this->urlId}/checks");
         $response->assertSessionHasNoErrors();
-        $this->assertDatabaseCount('url_checks', 1);
+        $this->assertDatabaseHas('url_checks', [
+            'url_id' => $this->urlId,
+            'status_code' => 404,
+        ]);
     }
 
     public function testNotExistingUrlCheck(): void

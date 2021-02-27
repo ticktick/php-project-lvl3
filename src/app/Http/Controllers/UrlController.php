@@ -4,9 +4,11 @@ namespace App\Http\Controllers;
 
 use Carbon\Carbon;
 use Illuminate\Database\Query\Builder;
+use Illuminate\Http\Client\ConnectionException;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\View\View;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
@@ -52,7 +54,7 @@ class UrlController extends Controller
     {
         $urls = $this->getUrlsTable()->select()->get();
         $lastChecks = $this->getUrlChecksTable()
-                           ->select(DB::raw('DISTINCT ON (url_id) url_id, created_at'))
+                           ->select(DB::raw('DISTINCT ON (url_id) url_id, created_at, status_code'))
                            ->orderBy('url_id')
                            ->orderBy('created_at', 'DESC')
                            ->get()
@@ -81,15 +83,21 @@ class UrlController extends Controller
             return redirect()->back();
         }
 
-        $now = Carbon::now();
-        $this->getUrlChecksTable()->insert(
-            [
-                'url_id'     => $id,
-                'updated_at' => $now,
-                'created_at' => $now,
-            ]
-        );
-        flash("Check for {$url->name} was run")->success();
+        try {
+            $response = Http::get($url->name);
+            $now = Carbon::now();
+            $this->getUrlChecksTable()->insert(
+                [
+                    'url_id'      => $id,
+                    'status_code' => $response->status(),
+                    'updated_at'  => $now,
+                    'created_at'  => $now,
+                ]
+            );
+            flash("Check for {$url->name} was run")->success();
+        } catch (ConnectionException $e) {
+            flash($e->getMessage())->error();
+        }
 
         return redirect()->back();
     }
