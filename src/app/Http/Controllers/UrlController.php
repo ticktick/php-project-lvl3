@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Carbon\Carbon;
+use DiDom\Exceptions\InvalidSelectorException;
 use Illuminate\Database\Query\Builder;
 use Illuminate\Http\Client\ConnectionException;
 use Illuminate\Http\RedirectResponse;
@@ -12,6 +13,7 @@ use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\View\View;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
+use DiDom\Document;
 
 class UrlController extends Controller
 {
@@ -38,13 +40,12 @@ class UrlController extends Controller
         if ($urlExists) {
             flash("Domain {$domain} already added");
         } else {
-            $urlsTable->insert(
-                [
-                    'name'       => $domain,
-                    'updated_at' => $now,
-                    'created_at' => $now,
-                ]
-            );
+            $newUrl = [
+                'name'       => $domain,
+                'updated_at' => $now,
+                'created_at' => $now,
+            ];
+            $urlsTable->insert($newUrl);
             flash("Domain {$domain} successfully added")->success();
         }
         return redirect()->back();
@@ -85,16 +86,26 @@ class UrlController extends Controller
 
         try {
             $response = Http::get($url->name);
+            $html = $response->body();
+            $document = new Document($html);
+            $h1 = optional($document->first('h1'))->text();
+            $keywords = optional($document->first('meta[name=keywords]'))->getAttribute('content');
+            $description = optional($document->first('meta[name=description]'))->getAttribute('content');
             $now = Carbon::now();
             $this->getUrlChecksTable()->insert(
                 [
                     'url_id'      => $id,
                     'status_code' => $response->status(),
+                    'h1'          => $h1,
+                    'keywords'    => $keywords,
+                    'description' => $description,
                     'updated_at'  => $now,
                     'created_at'  => $now,
                 ]
             );
             flash("Check for {$url->name} was run")->success();
+        } catch (InvalidSelectorException $e) {
+            flash(htmlspecialchars($e->getMessage()))->error();
         } catch (ConnectionException $e) {
             flash($e->getMessage())->error();
         }

@@ -1,17 +1,17 @@
 @extends('layout')
 
 @section('title')
-    Сайты
+    {{ __('main.urls') }}
 @endsection
 
 @section('content')
     <div class="table-responsive">
         <table class="table table-bordered table-hover text-nowrap">
             <tr>
-                <th>ID</th>
-                <th>Имя</th>
-                <th>Последняя проверка</th>
-                <th>Код ответа</th>
+                <th>{{ __('columns.id') }}</th>
+                <th>{{ __('columns.name') }}</th>
+                <th>{{ __('columns.last_check') }}</th>
+                <th>{{ __('columns.code') }}</th>
             </tr>
         @foreach ($urls as $url)
             <tr>

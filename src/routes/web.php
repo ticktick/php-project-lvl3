@@ -18,7 +18,7 @@ require_once __DIR__ . '/../vendor/autoload.php';
 
 Route::get('/', function () {
     return view('urls.add_form');
-});
+})->name('home');
 
 Route::post('urls', UrlController::class . '@add')->name('urls.add');
 Route::get('urls', UrlController::class . '@list')->name('urls.list');

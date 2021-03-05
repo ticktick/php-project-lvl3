@@ -1,7 +1,7 @@
 {
-    "name": "laravel/laravel",
+    "name": "hexlet/code",
     "type": "project",
-    "description": "The Laravel Framework.",
+    "description": "Page Analyzer",
     "keywords": [
         "framework",
         "laravel"
@@ -14,7 +14,8 @@
         "guzzlehttp/guzzle": "^7.2",
         "laracasts/flash": "^3.2",
         "laravel/framework": "^8.0",
-        "laravel/tinker": "^2.0"
+        "laravel/tinker": "^2.0",
+        "imangazaliev/didom": "^1.16"
     },
     "require-dev": {
         "facade/ignition": "^2.3.6",

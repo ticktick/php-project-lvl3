@@ -1,7 +1,7 @@
 @extends('layout')
 
 @section('title')
-    Page Analyzer
+    {{ __('main.site_name') }}
 @endsection
 
 @section('content')
@@ -11,7 +11,7 @@
         <input name="url[name]" type="text" class="@error('url.name') is-invalid @enderror form-control form-control-lg" placeholder="https://www.example.com">
 
         <button type="submit" class="btn btn-lg btn-primary ml-3 px-5 text-uppercase">
-            Add
+            {{ __('buttons.add_url') }}
         </button>
     </form>
 @endsection
