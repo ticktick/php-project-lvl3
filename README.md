@@ -5,4 +5,4 @@
 ![CI Status](https://github.com/ticktick/php-project-lvl3/workflows/CI/badge.svg)
 
 ### Example
-https://page-analyzer-ticktick.herokuapp.com/
+https://page-analyzer-3.herokuapp.com/
